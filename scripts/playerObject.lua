@@ -108,10 +108,41 @@ function make_input_set(_value)
       if current and prev then
         player_objects[1].flip_input = current.p1_facing == "right" 
         player_objects[2].flip_input = current.p2_facing == "right" 
+        -- p1 pursuit ok
+        if 
+          current.p1_pursuit_ok == true and 
+          prev.p1_pursuit_ok == false 
+        then 
+          player_objects[2].p1_pursuit_window_started = emu.framecount()
+        end
+        
+        if 
+          prev.p1_pursuit_ok == true and 
+          current.p1_pursuit_ok == false 
+        then 
+          player_objects[2].p1_pursuit_window_ended  = emu.framecount()
+        end
+        if player_objects[2].p1_pursuit_window_ended and player_objects[2].p1_pursuit_window_started then
+            globals.p1_last_pursuit_length = player_objects[2].p1_pursuit_window_ended - player_objects[2].p1_pursuit_window_started 
+        end
+        -- p2 pursuit ok
+        if 
+          current.p2_pursuit_ok == true and 
+          prev.p2_pursuit_ok == false 
+        then 
+          player_objects[2].p2_pursuit_window_started = emu.framecount()
+        end
+        
+        if 
+          prev.p2_pursuit_ok == true and 
+          current.p2_pursuit_ok == false 
+        then 
+          player_objects[2].p2_pursuit_window_ended  = emu.framecount()
+        end
+        if player_objects[2].p2_pursuit_window_ended and player_objects[2].p2_pursuit_window_started then
+          globals.p2_last_pursuit_length = player_objects[2].p2_pursuit_window_ended - player_objects[2].p2_pursuit_window_started
+        end
 
-        -- if current.p2_status_1 == "Hurt or Block" then 
-        --   print("hurt or block")
-        -- end
         if current.p2_guarding == true and prev.p2_guarding == false then 
           player_objects[2].started_guarding  = true
         else
