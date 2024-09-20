@@ -1,3 +1,5 @@
+local tech_hit_inputs = require './tech-hit-inputs'
+
 local function draw_fd()
 	mid_width = 23
 	mid_height = 47
@@ -187,6 +189,7 @@ local function draw_pb_stats()
 			gui.text( 210, 63, "%" .. string.format("%02d", util.tablelength(globals.successful_pb_counter) / util.tablelength(globals.total_pb_attempt_counter) * 100), "#00FF00")
 		end
 		gui.text( 172, 73, "Fail: " .. util.tablelength(globals.total_pb_attempt_counter) - util.tablelength(globals.successful_pb_counter), "#FF0000")
+		tech_hit_inputs()
 	end
 end
 
