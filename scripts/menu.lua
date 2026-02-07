@@ -601,7 +601,8 @@ roll_direction = {
     "Towards",
     "Away",
     "Random (All)",
-    "Random (Left/Right Only)"
+    "Random (Left/Right Only)",
+    "P2 controller"
 }
 guard_action_type = {
     "None",
